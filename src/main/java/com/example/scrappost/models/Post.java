@@ -1,5 +1,8 @@
 package com.example.scrappost.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
@@ -9,7 +12,14 @@ public class Post {
 
     @Id
     public String id;
+
+    @NotNull
+    @NotBlank
+    @Size(max = 100)
     public String title;
+    @NotNull
+    @NotBlank
+    @Size(max = 1000)
     public String content;
     public String imageId;
     public List<String> tags;
@@ -82,4 +92,18 @@ public class Post {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", imageId='" + imageId + '\'' +
+                ", tags=" + tags +
+                ", creationStamp=" + creationStamp +
+                ", lastUpdatedDate=" + lastUpdatedDate +
+                ", numberOfUpvote=" + numberOfUpvote +
+                ", image=" + image +
+                '}';
+    }
 }

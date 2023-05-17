@@ -22,7 +22,7 @@ public class CreatorReactiveService {
     }
 
     public Mono<List<Creator>> getCreatorsByGraphQlClient() {
-        String graphQlDocument = buildGraphQlDocument("firstName","lastName", "post { title, content, tags }");
+        String graphQlDocument = buildGraphQlQueryDocument("firstName","lastName", "post { title, content, tags }");
         return graphQlClient.httpGraphQlCLient()
                 .document(graphQlDocument)
                 .retrieve("allCreators")
@@ -32,7 +32,7 @@ public class CreatorReactiveService {
         return creatorReactiveRepository.findById(id).switchIfEmpty(Mono.error(new NoSuchElementException()));
     }
 
-    public String buildGraphQlDocument(String... fields) {
+    public String buildGraphQlQueryDocument(String... fields) {
         StringBuilder sb = new StringBuilder();
         sb.append("query {\n");
         sb.append("  allCreators {\n");

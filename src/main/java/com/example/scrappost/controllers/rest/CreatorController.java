@@ -1,4 +1,4 @@
-package com.example.scrappost.controllers;
+package com.example.scrappost.controllers.rest;
 
 import com.example.scrappost.models.Creator;
 import com.example.scrappost.models.records.CreatorInput;

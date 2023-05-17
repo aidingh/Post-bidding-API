@@ -15,7 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/reactive/v1")
 public class CreatorReactiveController {
-
     private final CreatorReactiveService creatorReactiveService;
 
     public CreatorReactiveController(CreatorReactiveService creatorReactiveService) {

@@ -1,0 +1,36 @@
+
+type Query{
+    allCreators: [Creator]
+    allPosts: [Post]
+    findCreator(id: ID): Creator
+}
+
+type Creator {
+    id: ID
+    firstName: String
+    lastName: String
+    email: String
+    gender: Gender
+    age: Int
+    amountOfPosts: Int
+    nationality: String
+    address: Address
+    post:[Post]
+}
+
+enum Gender{
+    MALE
+    FEMALE
+}
+
+type Address{
+    country: String!
+    city: String!
+    postCode: String!
+}
+
+type Post{
+    title: String!
+    content: String!
+    tags: [String]!
+}

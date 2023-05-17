@@ -1,0 +1,29 @@
+
+type Mutation {
+    addCreatorWithPosts(creator: CreatorInput, posts: [PostInput]): Creator
+    addCreator(creator: CreatorInput): Creator
+}
+
+input CreatorInput {
+    firstName: String @Size(min : 5, max : 20)
+    lastName: String @Size(min : 5, max : 20)
+    email: String @Pattern(regexp : "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
+    gender: Gender
+    age: Int
+    amountOfPosts: Int @PositiveOrZero
+    nationality: String
+    address: AddressInput
+    post: [PostInput]
+}
+
+input AddressInput {
+    country: String! @Size(min : 5, max : 20) @NotEmpty
+    city: String! @Size(min : 5, max : 20) @NotEmpty
+    postCode: String! @Size(min : 5, max : 20) @NotEmpty
+}
+
+input PostInput {
+    title: String!
+    content: String!
+    tags: [String]!
+}
