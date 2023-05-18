@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
-
 @SpringBootApplication
 @EnableWebSocket
 @EnableReactiveMongoRepositories(basePackages = "com.example.scrappost.repository.reactive")

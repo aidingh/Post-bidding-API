@@ -31,7 +31,7 @@ public class CreatorService {
     public Creator saveCreatorWithPosts(CreatorInput creatorInput, List<PostInput> postInput){
 
         List<Post> posts = postInput.stream()
-                .map(input -> new Post(input.title(), input.content(), input.tags()))
+                .map(input -> new Post(input.title(), input.content(), input.tags(), input.bidPrice()))
                 .peek(postService::createPost)
                 .collect(Collectors.toList());
 

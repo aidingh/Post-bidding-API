@@ -26,4 +26,5 @@ input PostInput {
     title: String!
     content: String!
     tags: [String]!
+    bidPrice: Int!
 }

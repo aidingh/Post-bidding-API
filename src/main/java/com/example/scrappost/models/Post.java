@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.List;
@@ -26,22 +27,18 @@ public class Post {
     public Date creationStamp;
     public Date lastUpdatedDate;
     public int numberOfUpvote;
+
+    public int bidPrice;
+    @DBRef
     public PostImage image;
 
     public Post() {}
 
-    public Post(String title, String content, List<String> tags) {
+    public Post(String title, String content, List<String> tags, int bidPrice) {
         this.title = title;
         this.content = content;
         this.tags = tags;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        id = id;
+        this.bidPrice = bidPrice;
     }
 
     public String getTitle() {
@@ -92,6 +89,30 @@ public class Post {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
+    public int getNumberOfUpvote() {
+        return numberOfUpvote;
+    }
+
+    public void setNumberOfUpvote(int numberOfUpvote) {
+        this.numberOfUpvote = numberOfUpvote;
+    }
+
+    public int getBidPrice() {
+        return bidPrice;
+    }
+
+    public void setBidPrice(int bidPrice) {
+        this.bidPrice = bidPrice;
+    }
+
+    public PostImage getImage() {
+        return image;
+    }
+
+    public void setImage(PostImage image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -103,6 +124,7 @@ public class Post {
                 ", creationStamp=" + creationStamp +
                 ", lastUpdatedDate=" + lastUpdatedDate +
                 ", numberOfUpvote=" + numberOfUpvote +
+                ", bidPrice=" + bidPrice +
                 ", image=" + image +
                 '}';
     }

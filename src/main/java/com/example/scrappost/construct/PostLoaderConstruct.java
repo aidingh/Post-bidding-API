@@ -6,14 +6,12 @@ import com.example.scrappost.models.Post;
 import com.example.scrappost.models.enums.Gender;
 import com.example.scrappost.service.CreatorService;
 import com.example.scrappost.service.PostService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
-
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 @Component
 public class PostLoaderConstruct {
     private final CreatorService creatorService;
@@ -25,9 +23,9 @@ public class PostLoaderConstruct {
     }
 
     public void insertDataIntoDB(){
-        Post setHairOnFirePOst = new Post("HOW TO NOT SET YOUR HAIR ON FIRE", "Tutorial on how to not lose your hair", Stream.of("Baldness", "A lot of hair", "Prevent hair loss").collect(Collectors.toList()));
-        Post dadJokePost = new Post("BEST DAD JOKES OF 2023", "Where do fruits go on vacation? Pear-is!", Stream.of("Dad-jokes", "Funny", "2023").collect(Collectors.toList()));
-        Post magnusDidNothingWrongPost = new Post("MAGNUS DID NOTHING WRONG", "We all know that Magnus just wanted to help the emperor", Stream.of("Warhammer 40k", "Ultra-marines-lol", "Horus").collect(Collectors.toList()));
+        Post setHairOnFirePOst = new Post("HOW TO NOT SET YOUR HAIR ON FIRE", "Tutorial on how to not lose your hair", Stream.of("Baldness", "A lot of hair", "Prevent hair loss").collect(Collectors.toList()), 0);
+        Post dadJokePost = new Post("BEST DAD JOKES OF 2023", "Where do fruits go on vacation? Pear-is!", Stream.of("Dad-jokes", "Funny", "2023").collect(Collectors.toList()), 100);
+        Post magnusDidNothingWrongPost = new Post("MAGNUS DID NOTHING WRONG", "We all know that Magnus just wanted to help the emperor", Stream.of("Warhammer 40k", "Ultra-marines-lol", "Horus").collect(Collectors.toList()), 20);
 
         postService.createPost(setHairOnFirePOst);
         postService.createPost(dadJokePost);
