@@ -16,7 +16,6 @@ public class ValidationDirectiveConfig {
                 .build();
 
         ValidationSchemaWiring schemaWiring = new ValidationSchemaWiring(validationRules);
-
         return builder -> builder.directiveWiring(schemaWiring).build();
     }
 }

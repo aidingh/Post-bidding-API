@@ -1,11 +1,13 @@
 package com.example.scrappost.controllers.rest;
 
 import com.example.scrappost.models.Post;
+import com.example.scrappost.models.wrappers.PostWrapper;
 import com.example.scrappost.service.PostService;
 import com.example.scrappost.service.reactive.PostSubscription;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,14 +31,22 @@ public class PostController {
         return postService.createPost(post);
     }
 
-    @RequestMapping(value = "/create/post-image", method = RequestMethod.POST)
-    public ResponseEntity<String> createPostWithImage(@RequestBody Post post, @RequestParam("image") MultipartFile imageFile) {
+    @PostMapping(value = "/create/post-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> createPostWithImage(@ModelAttribute PostWrapper postWrapper) {
+        Post post = postWrapper.getPost();
+        MultipartFile imageFile = postWrapper.getImageFile();
+
         try {
             postService.createPostWithImage(post, imageFile);
             return ResponseEntity.ok("Post created successfully with image.");
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create post with image.");
         }
+    }
+
+    @RequestMapping(value = "/create/update/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Post> updatePostById(@RequestBody Post post, @PathVariable String id) throws IllegalAccessException {
+        return postService.updateById(post, id);
     }
 
     @QueryMapping

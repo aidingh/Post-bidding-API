@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -39,6 +40,23 @@ public class PostService {
         post.setImage(savedImage);
 
        postRepository.save(post);
+    }
+
+    public ResponseEntity<Post> updateById(Post newPost, String id) throws IllegalAccessException {
+        Post retrivedPost = postRepository.findById(id).orElseThrow(NoSuchElementException::new);
+
+        Field[] fields = newPost.getClass().getDeclaredFields();
+
+        for (Field field : fields) {
+            field.setAccessible(true);
+            Object newValue = field.get(newPost);
+
+            if (newValue != null) {
+                field.set(retrivedPost, newValue);
+            }
+        }
+        retrivedPost.setLastUpdatedDate(new Date());
+        return new ResponseEntity<>(postRepository.save(retrivedPost), HttpStatus.OK);
     }
 
     public Post findByTitle(String title){
