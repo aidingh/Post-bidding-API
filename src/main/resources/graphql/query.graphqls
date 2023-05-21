@@ -1,4 +1,3 @@
-
 type Query{
     allCreators: [Creator]
     allPosts: [Post]
@@ -34,4 +33,11 @@ type Post{
     content: String!
     tags: [String]!
     bidPrice: Int!
+    image: PostImage
+}
+
+type PostImage{
+    contentType: String
+    fileName: String
+    data: String
 }

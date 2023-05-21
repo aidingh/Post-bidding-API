@@ -12,10 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
-
 import java.io.IOException;
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1")
 public class PostController {
@@ -44,9 +42,14 @@ public class PostController {
         }
     }
 
-    @RequestMapping(value = "/create/update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Post> updatePostById(@RequestBody Post post, @PathVariable String id) throws IllegalAccessException {
         return postService.updateById(post, id);
+    }
+
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    public Post getPostById(@PathVariable String id){
+        return postService.getPostById(id);
     }
 
     @QueryMapping

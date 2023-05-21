@@ -4,10 +4,7 @@ import com.example.scrappost.models.Creator;
 import com.example.scrappost.service.reactive.CreatorReactiveService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.util.List;
@@ -24,6 +21,11 @@ public class CreatorReactiveController {
     @RequestMapping(value = "/get/creatorsByGraphQlClient", method = RequestMethod.GET)
     public ResponseEntity<Mono<List<Creator>>> getCreatorsByGraphQlClient() {
         return new ResponseEntity<>(creatorReactiveService.getCreatorsByGraphQlClient(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/get/by-query", method = RequestMethod.POST)
+    public ResponseEntity<Mono<List<Creator>>> getCreatorsByQuery(@RequestBody String query) {
+        return new ResponseEntity<>(creatorReactiveService.getCreatorsByQuery(query), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/list/creators", method = RequestMethod.GET)

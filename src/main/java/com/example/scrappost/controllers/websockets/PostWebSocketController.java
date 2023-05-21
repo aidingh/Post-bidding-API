@@ -25,4 +25,9 @@ public class PostWebSocketController {
         return Flux.interval(Duration.ofSeconds(1))
                 .flatMap(i -> Flux.fromIterable(postRepository.findAll()).collectList());
     }
+    @MessageMapping("post-stream-bid")
+    public Flux<Integer> newPostStreamBid() {
+        return Flux.interval(Duration.ofSeconds(1))
+                        .flatMap(i -> postReactiveRepository.findAll().map(Post::getBidPrice));
+    }
 }

@@ -6,6 +6,7 @@ import com.example.scrappost.models.Post;
 import com.example.scrappost.models.enums.Gender;
 import com.example.scrappost.service.CreatorService;
 import com.example.scrappost.service.PostService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -17,6 +18,8 @@ public class PostLoaderConstruct {
     private final CreatorService creatorService;
     private final PostService postService;
 
+    @Value("${app.env}")
+    private String environment;
     public PostLoaderConstruct(CreatorService creatorService, PostService postService) {
         this.creatorService = creatorService;
         this.postService = postService;
@@ -50,6 +53,7 @@ public class PostLoaderConstruct {
 
     @PostConstruct
     private void init() {
+        System.out.println(environment);
         if(creatorService.isCreatorCollectionEmpty()){
             System.out.println("---- DB inserting initiated ----");
             insertDataIntoDB();

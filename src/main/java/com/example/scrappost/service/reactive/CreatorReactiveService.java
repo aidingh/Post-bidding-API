@@ -28,6 +28,14 @@ public class CreatorReactiveService {
                 .retrieve("allCreators")
                 .toEntityList(Creator.class);
     }
+
+    public Mono<List<Creator>> getCreatorsByQuery(String queryDocument) {
+        return graphQlClient.httpGraphQlCLient()
+                .document(queryDocument)
+                .retrieve("allCreators")
+                .toEntityList(Creator.class);
+    }
+
     public Mono<Creator> findById(String id){
         return creatorReactiveRepository.findById(id).switchIfEmpty(Mono.error(new NoSuchElementException()));
     }

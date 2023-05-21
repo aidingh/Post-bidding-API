@@ -59,6 +59,10 @@ public class PostService {
         return new ResponseEntity<>(postRepository.save(retrivedPost), HttpStatus.OK);
     }
 
+    public Post getPostById(String id){
+        return postRepository.findById(id).orElseThrow(NoSuchElementException::new);
+    }
+
     public Post findByTitle(String title){
         return postRepository.findPostByTitle(title).orElseThrow(NoSuchElementException::new);
     }
