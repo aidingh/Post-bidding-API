@@ -12,6 +12,8 @@ services:
       - 27017:27017
     volumes:
       - data:/data
+    networks:
+      - mongodb_network
 
   mongo-express:
     image: mongo-express:latest
@@ -23,10 +25,27 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
       ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
       ME_CONFIG_MONGODB_SERVER: mongodb
+    networks:
+      - mongodb_network
+
+  scrap-post:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: scrap-post
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - 8888:8080
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo
+    networks:
+      - mongodb_network
 
 volumes:
   data: {}
 
 networks:
-  default:
+  mongodb_network:
     name: mongodb_network
