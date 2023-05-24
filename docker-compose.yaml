@@ -28,7 +28,7 @@ services:
     networks:
       - mongodb_network
 
-  scrap-post:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
