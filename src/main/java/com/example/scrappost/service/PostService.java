@@ -79,4 +79,12 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public ResponseEntity<Post> deletePostById(String id){
+        return postRepository.findById(id)
+                .map(post -> {
+                    postRepository.deleteById(id);
+                    return ResponseEntity.ok(post);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

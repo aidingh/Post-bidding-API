@@ -7,6 +7,7 @@ import com.example.scrappost.models.records.PostInput;
 import com.example.scrappost.repository.CreatorRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
@@ -66,5 +67,12 @@ public class CreatorService {
     public boolean isCreatorCollectionEmpty(){
         long count = creatorRepository.count();
         return count == 0;
+    }
+
+    public ResponseEntity<Creator> deleteCreatorById(String id){
+        return creatorRepository.findById(id).map(creator -> {
+            creatorRepository.deleteById(id);
+            return ResponseEntity.ok(creator);
+        }).orElse(ResponseEntity.notFound().build());
     }
 }

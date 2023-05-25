@@ -52,6 +52,11 @@ public class PostController {
         return postService.getPostById(id);
     }
 
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Post> deleteById(@PathVariable String id){
+        return postService.deletePostById(id);
+    }
+
     @QueryMapping
     public List<Post> allPosts(){
         return postService.findAllPostsTest();

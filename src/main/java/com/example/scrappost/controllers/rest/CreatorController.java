@@ -7,10 +7,9 @@ import com.example.scrappost.service.CreatorService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -25,6 +24,11 @@ public class CreatorController {
     @RequestMapping(value = "/save/creator", method = RequestMethod.POST)
     public Creator saveCreator(@RequestBody Creator creator) {
         return creatorService.saveCreator(creator);
+    }
+
+    @RequestMapping(value = "/delete/creator/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Creator> deleteCreatorById(@PathVariable String id){
+        return creatorService.deleteCreatorById(id);
     }
 
     @MutationMapping
